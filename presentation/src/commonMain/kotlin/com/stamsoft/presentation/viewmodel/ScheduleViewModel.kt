@@ -1,6 +1,8 @@
 package com.stamsoft.presentation.viewmodel
 
+import com.stamsoft.domain.model.Program
 import com.stamsoft.domain.usecase.GetScheduleUseCase
+import com.stamsoft.presentation.actions.ScheduleAction
 import com.stamsoft.presentation.states.ScheduleState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,24 +23,38 @@ class ScheduleViewModel(
     private val _state = MutableStateFlow(ScheduleState())
     val state: StateFlow<ScheduleState> = _state.asStateFlow()
 
-    fun loadSchedule(channelId: String, date: LocalDate) {
+    fun sendAction(action: ScheduleAction) {
+        when (action) {
+            is ScheduleAction.LoadSchedule -> loadSchedule(action.channelId, action.date)
+            ScheduleAction.Clear -> clear()
+        }
+    }
+
+    private fun loadSchedule(channelId: String, date: LocalDate) {
         scope.launch {
-            _state.update { it.copy(isLoading = true, error = null) }
+            setLoading()
             try {
                 val programs = getScheduleUseCase(channelId, date)
-                _state.update { it.copy(isLoading = false, programs = programs) }
+                setPrograms(programs)
             } catch (e: Exception) {
-                _state.update {
-                    it.copy(
-                        isLoading = false,
-                        error = e.message ?: "An unexpected error occurred"
-                    )
-                }
+                setError(e.message ?: "An unexpected error occurred")
             }
         }
     }
 
-    fun clear() {
+    private fun clear() {
         scope.cancel()
+    }
+
+    private fun setLoading() {
+        _state.update { it.copy(isLoading = true, error = null) }
+    }
+
+    private fun setPrograms(programs: List<Program>) {
+        _state.update { it.copy(isLoading = false, programs = programs, error = null) }
+    }
+
+    private fun setError(message: String) {
+        _state.update { it.copy(isLoading = false, error = message) }
     }
 }

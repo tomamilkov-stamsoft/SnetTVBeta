@@ -49,6 +49,8 @@ kotlin {
             // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.androidx.navigation3.runtime)
+            implementation(libs.androidx.navigation3.ui)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -10,28 +10,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.stamsoft.domain.model.Program
-import com.stamsoft.presentation.viewmodel.ScheduleViewModel
+import com.stamsoft.presentation.actions.ScheduleAction
+import com.stamsoft.presentation.states.ScheduleState
 import com.stamsoft.snettvbeta.util.toHourMinute
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
-import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleScreen(
-    onBack: () -> Unit,
-    viewModel: ScheduleViewModel = koinInject()
+    state: ScheduleState,
+    onAction: (ScheduleAction) -> Unit,
+    onBack: () -> Unit
 ) {
-    val state by viewModel.state.collectAsState()
-
     LaunchedEffect(Unit) {
         val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-        viewModel.loadSchedule("test-channel", today)
+        onAction(ScheduleAction.LoadSchedule("test-channel", today))
     }
 
-    DisposableEffect(viewModel) {
-        onDispose { viewModel.clear() }
+    DisposableEffect(Unit) {
+        onDispose { onAction(ScheduleAction.Clear) }
     }
 
     Scaffold(
