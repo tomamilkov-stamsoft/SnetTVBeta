@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.stamsoft.domain.model.Program
 import com.stamsoft.presentation.viewmodel.ScheduleViewModel
+import com.stamsoft.snettvbeta.util.toHourMinute
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
@@ -92,7 +93,7 @@ fun ProgramItem(program: Program) {
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "${formatTime(program.startTime)} - ${formatTime(program.endTime)}",
+                    text = "${program.startTime.toHourMinute()} - ${program.endTime.toHourMinute()}",
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -105,10 +106,4 @@ fun ProgramItem(program: Program) {
             )
         }
     }
-}
-
-fun formatTime(dateTime: kotlinx.datetime.LocalDateTime): String {
-    val hour = dateTime.hour.toString().padStart(2, '0')
-    val minute = dateTime.minute.toString().padStart(2, '0')
-    return "$hour:$minute"
 }
