@@ -3,12 +3,11 @@ package com.stamsoft.snettvbeta
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.background
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import com.stamsoft.snettvbeta.designsystem.LocalDSTheme
+import com.stamsoft.snettvbeta.designsystem.PrimaryButton
 
 @Composable
 fun MainScreen(
@@ -17,11 +16,12 @@ fun MainScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(LocalDSTheme.current.colors.base0),
         contentAlignment = Alignment.Center
     ) {
-        Button(onClick = onNavigateToSchedule) {
-            Text("Click me!")
-        }
+        PrimaryButton(
+            text = "Click me!",
+            onClick = onNavigateToSchedule,
+        )
     }
 }

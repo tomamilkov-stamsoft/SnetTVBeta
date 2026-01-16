@@ -16,38 +16,35 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
-// Change the color values in Colors.kt
-val Primary1 = Color(0xFFC5416D)
-val Primary2 = Color(0xFFE2A0B6)
-val Secondary1 = Color(0xFF7C7CCD)
-val Secondary2 = Color(0xFFCBCBEB)
-val Tertiary1 = Color(0xFF15B9D1)
-val Tertiary2 = Color(0xFFA1E3ED)
-val AlertPrimary = Color(0xFFC5416D)
-val AlertSecondary = Color(0xFFEEC6D3)
-val SuccessPrimary = Color(0xFF15B9D1)
-val SuccessSecondary = Color(0xFFB9EAF1)
-val CautionPrimary = Color(0xFF7C7CCD)
-val CautionSecondary = Color(0xFFD8D8F0)
-val Base100 = Color(0xFF222222)
-val Base90 = Color(0xFF2D2D2D)
-val Base85 = Color(0xFF393939)
-val Base80 = Color(0xFF4E4E4E)
-val Base60 = Color(0xFF7A7A7A)
-val Base40 = Color(0xFFA7A7A7)
-val Base20 = Color(0xFFD3D3D3)
+// Design system colors
+val Primary1 = Color(0xFFFFA696)
+val Primary2 = Color(0xFFFFD6CF)
+val Primary3 = Color(0xFFFF9785)
+val PrimaryButton = Color(0xFFD2AB67)
+val AlertPrimary = Color(0xFFFF4C4C)
+val AlertSecondary = Color(0xFFFFC9C9)
+val SuccessPrimary = Color(0xFF00E248)
+val SuccessSecondary = Color(0xFFB2F6C8)
+val CautionPrimary = Color(0xFFFFB03A)
+val CautionSecondary = Color(0xFFFFDFB0)
+val Base100 = Color(0xFF121212)
+val Base80 = Color(0xFF252525)
+val Base60 = Color(0xFF313131)
+val Base40 = Color(0xFF575757)
+val Base20 = Color(0xFFA0A0A0)
+val Base10 = Color(0xFFCACACA)
+val Base5 = Color(0xFFE2E2E2)
 val Base0 = Color(0xFFFFFFFF)
-val MainGradient = Brush.linearGradient(listOf(Primary1, Secondary1, Tertiary1))
+val BaseGradient = Brush.linearGradient(listOf(Base100, Base0))
+val PrimaryGradient = Brush.linearGradient(listOf(Color(0xFFD2AB67), Color(0xFFBE985A)))
 
 // Create a class with all used colors for your theme
 data class Colors(
     var background: Color,
     val primary1: Color,
     val primary2: Color,
-    val secondary1: Color,
-    val secondary2: Color,
-    val tertiary1: Color,
-    val tertiary2: Color,
+    val primary3: Color,
+    val primaryButton: Color,
     val alertPrimary: Color,
     val alertSecondary: Color,
     val successPrimary: Color,
@@ -55,14 +52,15 @@ data class Colors(
     val cautionPrimary: Color,
     val cautionSecondary: Color,
     val base100: Color,
-    val base90: Color,
-    val base85: Color,
     val base80: Color,
     val base60: Color,
     val base40: Color,
     val base20: Color,
+    val base10: Color,
+    val base5: Color,
     val base0: Color,
-    val mainGradient: Brush,
+    val baseGradient: Brush,
+    val primaryGradient: Brush,
 )
 
 // Create a Theme class which defines the colors for both dark and light theme
@@ -70,10 +68,8 @@ private val DSLightImpl = Colors(
     background = Base100,
     primary1 = Primary1,
     primary2 = Primary2,
-    secondary1 = Secondary1,
-    secondary2 = Secondary2,
-    tertiary1 = Tertiary1,
-    tertiary2 = Tertiary2,
+    primary3 = Primary3,
+    primaryButton = PrimaryButton,
     alertPrimary = AlertPrimary,
     alertSecondary = AlertSecondary,
     successPrimary = SuccessPrimary,
@@ -81,24 +77,23 @@ private val DSLightImpl = Colors(
     cautionPrimary = CautionPrimary,
     cautionSecondary = CautionSecondary,
     base100 = Base100,
-    base90 = Base90,
-    base85 = Base85,
     base80 = Base80,
     base60 = Base60,
     base40 = Base40,
     base20 = Base20,
+    base10 = Base10,
+    base5 = Base5,
     base0 = Base0,
-    mainGradient = MainGradient
+    baseGradient = BaseGradient,
+    primaryGradient = PrimaryGradient
 )
 
 private val DSDarkImpl = Colors(
     background = Base100,
     primary1 = Primary1,
     primary2 = Primary2,
-    secondary1 = Secondary1,
-    secondary2 = Secondary2,
-    tertiary1 = Tertiary1,
-    tertiary2 = Tertiary2,
+    primary3 = Primary3,
+    primaryButton = PrimaryButton,
     alertPrimary = AlertPrimary,
     alertSecondary = AlertSecondary,
     successPrimary = SuccessPrimary,
@@ -106,20 +101,21 @@ private val DSDarkImpl = Colors(
     cautionPrimary = CautionPrimary,
     cautionSecondary = CautionSecondary,
     base100 = Base100,
-    base90 = Base90,
-    base85 = Base85,
     base80 = Base80,
     base60 = Base60,
     base40 = Base40,
     base20 = Base20,
+    base10 = Base10,
+    base5 = Base5,
     base0 = Base0,
-    mainGradient = MainGradient
+    baseGradient = BaseGradient,
+    primaryGradient = PrimaryGradient
 )
 
 private val DSDarkMaterialColors = darkColorScheme(
     primary = DSDarkImpl.primary1,
-    secondary = DSDarkImpl.secondary1,
-    tertiary = DSDarkImpl.tertiary1,
+    secondary = DSDarkImpl.primary2,
+    tertiary = DSDarkImpl.primary3,
     background = DSDarkImpl.base100,
     onBackground = DSDarkImpl.base80,
     onSecondary = DSDarkImpl.base60,
@@ -129,8 +125,8 @@ private val DSDarkMaterialColors = darkColorScheme(
 
 private val DSLightMaterialColors = lightColorScheme(
     primary = DSLightImpl.primary1,
-    secondary = DSLightImpl.secondary1,
-    tertiary = DSLightImpl.tertiary1,
+    secondary = DSLightImpl.primary2,
+    tertiary = DSLightImpl.primary3,
     background = DSLightImpl.base100,
     onBackground = DSLightImpl.base80,
     onSecondary = DSLightImpl.base60,
@@ -205,8 +201,8 @@ class DSTheme(
 fun Colors.toColorScheme(): ColorScheme {
     return lightColorScheme(
         primary = primary1,
-        secondary = secondary1,
-        tertiary = tertiary1,
+        secondary = primary2,
+        tertiary = primary3,
         background = base100,
         onBackground = base80,
         onSecondary = base60,
