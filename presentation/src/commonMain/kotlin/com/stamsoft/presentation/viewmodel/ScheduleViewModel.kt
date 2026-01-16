@@ -4,10 +4,8 @@ import com.stamsoft.domain.model.Program
 import com.stamsoft.domain.usecase.GetScheduleUseCase
 import com.stamsoft.presentation.actions.ScheduleAction
 import com.stamsoft.presentation.states.ScheduleState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,9 +14,8 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 
 class ScheduleViewModel(
-    private val getScheduleUseCase: GetScheduleUseCase,
-    private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-) {
+    private val getScheduleUseCase: GetScheduleUseCase
+) : ViewModel() {
 
     private val _state = MutableStateFlow(ScheduleState())
     val state: StateFlow<ScheduleState> = _state.asStateFlow()
@@ -26,12 +23,11 @@ class ScheduleViewModel(
     fun sendAction(action: ScheduleAction) {
         when (action) {
             is ScheduleAction.LoadSchedule -> loadSchedule(action.channelId, action.date)
-            ScheduleAction.Clear -> clear()
         }
     }
 
     private fun loadSchedule(channelId: String, date: LocalDate) {
-        scope.launch {
+        viewModelScope.launch {
             setLoading()
             try {
                 val programs = getScheduleUseCase(channelId, date)
@@ -40,10 +36,6 @@ class ScheduleViewModel(
                 setError(e.message ?: "An unexpected error occurred")
             }
         }
-    }
-
-    private fun clear() {
-        scope.cancel()
     }
 
     private fun setLoading() {
