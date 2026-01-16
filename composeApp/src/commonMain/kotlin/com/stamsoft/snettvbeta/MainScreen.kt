@@ -12,11 +12,10 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun MainScreen(
-    onNavigateToSchedule: () -> Unit,
-    modifier: Modifier = Modifier
+    onNavigateToSchedule: () -> Unit
 ) {
     Box(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
         contentAlignment = Alignment.Center

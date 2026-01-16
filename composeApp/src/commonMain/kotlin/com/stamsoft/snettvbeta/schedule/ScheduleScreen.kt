@@ -18,20 +18,15 @@ import kotlin.time.Clock
 @Composable
 fun ScheduleScreen(
     state: ScheduleState,
-    onAction: (ScheduleAction) -> Unit,
-    modifier: Modifier = Modifier
+    onAction: (ScheduleAction) -> Unit
 ) {
     LaunchedEffect(Unit) {
         val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
         onAction(ScheduleAction.LoadSchedule("test-channel", today))
     }
 
-    DisposableEffect(Unit) {
-        onDispose { onAction(ScheduleAction.Clear) }
-    }
-
     Box(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
         contentAlignment = Alignment.Center
