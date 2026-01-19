@@ -1,4 +1,4 @@
-package com.stamsoft.snettvbeta
+package com.stamsoft.snettvbeta.di
 
 import com.stamsoft.data.di.dataModule
 import com.stamsoft.domain.di.domainModule
