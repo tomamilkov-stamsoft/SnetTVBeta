@@ -10,9 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.res.stringResource
 import androidx.tv.material3.Button
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import com.stamsoft.androidtv.R
 
 @Composable
 fun MainScreen(
@@ -32,7 +34,7 @@ fun MainScreen(
             modifier = Modifier.focusRequester(focusRequester),
             onClick = onNavigateToSchedule
         ) {
-            Text(text = "Browse schedule")
+            Text(text = stringResource(R.string.tv_main_cta))
         }
     }
 }

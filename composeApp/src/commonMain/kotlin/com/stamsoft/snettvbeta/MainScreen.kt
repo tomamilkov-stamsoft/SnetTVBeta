@@ -8,6 +8,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stamsoft.snettvbeta.designsystem.LocalDSTheme
 import com.stamsoft.snettvbeta.designsystem.PrimaryButton
+import snettvbeta.composeapp.generated.resources.Res
+import snettvbeta.composeapp.generated.resources.main_cta
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MainScreen(
@@ -20,7 +23,7 @@ fun MainScreen(
         contentAlignment = Alignment.Center
     ) {
         PrimaryButton(
-            text = "Click me!",
+            text = stringResource(Res.string.main_cta),
             onClick = onNavigateToSchedule,
         )
     }

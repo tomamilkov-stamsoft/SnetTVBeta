@@ -10,10 +10,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import com.stamsoft.androidtv.R
 import com.stamsoft.androidtv.utils.currentLocalDate
 import com.stamsoft.presentation.schedule.ScheduleAction
 import com.stamsoft.presentation.schedule.ScheduleState
@@ -36,16 +38,16 @@ fun TvScheduleScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         TvScheduleHeader(
-            title = "Schedule",
+            titleResId = R.string.tv_schedule_title,
             onReload = { onAction(ScheduleAction.LoadSchedule("test-channel", currentLocalDate())) }
         )
 
         when {
             state.isLoading -> {
-                Text("Loading...")
+                Text(stringResource(R.string.tv_loading))
             }
             state.error != null -> {
-                Text("Error: ${state.error}")
+                Text(stringResource(R.string.tv_error_with_message, state.error.orEmpty()))
             }
             else -> {
                 LazyColumn(

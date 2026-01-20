@@ -1,0 +1,5 @@
+<resources>
+    <string name="main_cta">Натисни ме!</string>
+    <string name="error_with_message">Грешка: %1$s</string>
+    <string name="no_programs">Няма налични програми</string>
+</resources>
