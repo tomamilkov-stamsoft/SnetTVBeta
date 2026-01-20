@@ -1,22 +1,14 @@
 package com.stamsoft.androidtv
 
 import android.app.Application
-import com.stamsoft.data.di.dataModule
-import com.stamsoft.domain.di.domainModule
-import com.stamsoft.presentation.di.presentationModule
+import com.stamsoft.di.initKoin
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 
 class TvApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin {
+        initKoin {
             androidContext(this@TvApp)
-            modules(
-                domainModule,
-                dataModule,
-                presentationModule
-            )
         }
     }
 }
