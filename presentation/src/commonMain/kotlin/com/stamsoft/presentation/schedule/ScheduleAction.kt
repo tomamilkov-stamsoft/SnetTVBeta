@@ -1,4 +1,4 @@
-package com.stamsoft.presentation.actions
+package com.stamsoft.presentation.schedule
 
 import kotlinx.datetime.LocalDate
 

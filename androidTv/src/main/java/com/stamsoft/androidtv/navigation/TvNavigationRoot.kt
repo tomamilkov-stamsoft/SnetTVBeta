@@ -1,4 +1,4 @@
-package com.stamsoft.snettvbeta.navigation
+package com.stamsoft.androidtv.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -10,44 +10,44 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
+import com.stamsoft.androidtv.MainScreen
+import com.stamsoft.androidtv.schedule.TvScheduleScreen
 import com.stamsoft.presentation.schedule.ScheduleViewModel
-import com.stamsoft.snettvbeta.MainScreen
-import com.stamsoft.snettvbeta.schedule.ScheduleScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NavigationRoot(
+fun TvNavigationRoot(
     modifier: Modifier = Modifier
 ) {
     val navConfiguration = remember {
         SavedStateConfiguration {
             serializersModule = SerializersModule {
                 polymorphic(NavKey::class) {
-                    subclass(AppRoute.Main::class, AppRoute.Main.serializer())
-                    subclass(AppRoute.Schedule::class, AppRoute.Schedule.serializer())
+                    subclass(TvRoute.Main::class, TvRoute.Main.serializer())
+                    subclass(TvRoute.Schedule::class, TvRoute.Schedule.serializer())
                 }
             }
         }
     }
-    val backStack = rememberNavBackStack(navConfiguration, AppRoute.Main)
+    val backStack = rememberNavBackStack(navConfiguration, TvRoute.Main)
     NavDisplay(
         modifier = modifier,
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
         entryProvider = { key ->
             when (key) {
-                is AppRoute.Main -> NavEntry(key) {
+                is TvRoute.Main -> NavEntry(key) {
                     MainScreen(
-                        onNavigateToSchedule = { backStack.add(AppRoute.Schedule) }
+                        onNavigateToSchedule = { backStack.add(TvRoute.Schedule) }
                     )
                 }
 
-                is AppRoute.Schedule -> NavEntry(key) {
+                is TvRoute.Schedule -> NavEntry(key) {
                     val viewModel: ScheduleViewModel = koinViewModel()
                     val state by viewModel.state.collectAsState()
-                    ScheduleScreen(
+                    TvScheduleScreen(
                         state = state,
                         onAction = viewModel::sendAction
                     )

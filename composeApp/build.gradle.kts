@@ -63,6 +63,9 @@ kotlin {
             // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.androidx.compose)
+
+            // Nav3
             implementation(libs.androidx.navigation3.runtime)
             implementation(libs.androidx.navigation3.ui)
         }

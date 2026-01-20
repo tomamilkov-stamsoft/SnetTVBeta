@@ -1,4 +1,4 @@
-package com.stamsoft.presentation.states
+package com.stamsoft.presentation.schedule
 
 import com.stamsoft.domain.model.Program
 

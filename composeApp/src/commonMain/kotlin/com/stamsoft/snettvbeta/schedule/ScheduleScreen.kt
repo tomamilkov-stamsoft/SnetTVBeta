@@ -8,8 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.stamsoft.presentation.actions.ScheduleAction
-import com.stamsoft.presentation.states.ScheduleState
+import com.stamsoft.presentation.schedule.ScheduleAction
+import com.stamsoft.presentation.schedule.ScheduleState
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
