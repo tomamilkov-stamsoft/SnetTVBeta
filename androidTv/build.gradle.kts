@@ -46,7 +46,7 @@ kotlin {
 dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(":di"))
     implementation(project(":presentation"))
     
     implementation(libs.androidx.core.ktx)

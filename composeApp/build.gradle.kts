@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -23,6 +22,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            export(project(":di"))
         }
     }
     
@@ -31,10 +31,22 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
+            implementation(project(":di"))
+        }
+        val iosMain by creating {
+            dependsOn(commonMain.get())
+            dependencies {
+                api(project(":di"))
+            }
+        }
+        val iosArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
         commonMain.dependencies {
             implementation(project(":domain"))
-            implementation(project(":data"))
             implementation(project(":presentation"))
 
             implementation(libs.compose.runtime)

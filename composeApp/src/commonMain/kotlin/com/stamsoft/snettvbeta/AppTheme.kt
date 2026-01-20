@@ -1,9 +1,9 @@
 package com.stamsoft.snettvbeta
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import com.stamsoft.snettvbeta.designsystem.SnetTheme
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
-    MaterialTheme(content = content)
+    SnetTheme(content = content)
 }
