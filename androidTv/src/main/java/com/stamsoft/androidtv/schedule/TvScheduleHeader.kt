@@ -6,13 +6,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.tv.material3.Button
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import com.stamsoft.androidtv.R
 
 @Composable
 fun TvScheduleHeader(
-    title: String,
+    titleResId: Int,
     onReload: () -> Unit
 ) {
     Row(
@@ -21,11 +23,11 @@ fun TvScheduleHeader(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = title,
+            text = stringResource(titleResId),
             style = MaterialTheme.typography.headlineMedium
         )
         Button(onClick = onReload) {
-            Text("Reload")
+            Text(stringResource(R.string.tv_reload))
         }
     }
 }
