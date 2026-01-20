@@ -1,9 +1,7 @@
-package com.stamsoft.presentation.viewmodel
+package com.stamsoft.presentation.schedule
 
 import com.stamsoft.domain.model.Program
 import com.stamsoft.domain.usecase.GetScheduleUseCase
-import com.stamsoft.presentation.actions.ScheduleAction
-import com.stamsoft.presentation.states.ScheduleState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
